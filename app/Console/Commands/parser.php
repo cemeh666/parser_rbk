@@ -115,6 +115,8 @@ class parser extends Command
                 if($news_body && count($image_box = $news_body->find('.article__main-image__image') ?? null)){
                     $batch[$i]['img'] = $image_box->getAttribute('src') ?? null;
                 }
+                $batch[$i]['text'] = $this->getNewsText($news_body);
+
             }catch (\Exception $e){
                 echo "Ошибка парсинга полной новости: ".$item['link'];
                 echo "\n".$e->getMessage();
@@ -122,7 +124,6 @@ class parser extends Command
                 continue;
             }
 
-            $batch[$i]['text'] = $this->getNewsText($news_body);
 
         }
 
