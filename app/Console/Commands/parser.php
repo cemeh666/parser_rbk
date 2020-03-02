@@ -23,7 +23,9 @@ class parser extends Command
      */
     protected $description = 'Парсинг новостей с rbk.ru';
 
-    private $parse_url = 'https://www.rbc.ru/';
+    private $parse_url  = 'https://www.rbc.ru/';
+    
+    private $limit_news = 15;
 
     /**
      * Create a new command instance.
@@ -89,10 +91,14 @@ class parser extends Command
 
         $batch = [];
 
+        $count_news = 0;
+
         foreach ($news as $i => $item){
             if(in_array($item['id'], $news_ids)){
                 continue;
             }
+
+            $count_news++;
 
             $batch[$i] = [
                 'external_id'   => $item['id'],
@@ -123,7 +129,9 @@ class parser extends Command
                 echo "\n".$e->getTraceAsString();
                 continue;
             }
-
+            if($count_news >= $this->limit_news){
+                break;
+            }
 
         }
 
