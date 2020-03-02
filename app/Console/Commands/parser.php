@@ -71,7 +71,7 @@ class parser extends Command
                 'link'          => $link,
                 'id'            => $id,
                 'partners_news' => $link_host != $main_host,
-                'news_time'     => Carbon::createFromTimestamp($time)->toDateTimeString(),
+                'news_time'     => Carbon::createFromTimestamp($time)->setTimezone('Europe/Moscow')->toDateTimeString(),
             ];
         }
 

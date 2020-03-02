@@ -21,7 +21,7 @@ Route::get('/', function () {
             'news_time',
             'original_link'
         ])
-        ->orderBy('id', 'asc')
+        ->orderBy('news_time', 'desc')
         ->limit(15)
         ->get();
 
